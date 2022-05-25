@@ -24,11 +24,11 @@ export default function LoginForm() {
 
     const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body);
 
-    promise.catch(err => {
-      changeLoadLayout();
-      console.log("deu erro");
+    promise.catch(() => {
+      alert("Não foi possível realizar o login");
+      setCanBeChanged(true);
     });
-
+    
     promise.then(response => console.log(response.data));
   }
 
@@ -45,6 +45,7 @@ export default function LoginForm() {
       <input value={ userEmail } onChange={ verifyCanInteract(e => setUserEmail(e.target.value)) } type="email" placeholder="email" required />
       <input value={ userPassword } onChange={ verifyCanInteract(e => setUserPassword(e.target.value)) } type="password" placeholder="senha" required />
       <button type="submit">{ canBeChanged ? "Entrar" : <ThreeDots color="#FFFFFF" height={14} width={60} /> }</button>
+      { canBeChanged ? <h1>PAU</h1> : <></>}
     </FormContainer>
   );
 }
