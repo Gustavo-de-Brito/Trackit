@@ -11,12 +11,17 @@ const FormContainer = styled.form`
     margin-bottom: 8px;
     padding: 10px;
     font-size: 20px;
-    background-color: #FFFFFF;
+    background-color: ${({ canBeChanged }) => canBeChanged ? "#FFFFFF": "#F2F2F2"};
     border: solid 1px #D4D4D4;
     border-radius: 6px;
+    color: ${({ canBeChanged }) => canBeChanged ? "#000000": "#AFAFAF"};
   }
   
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 46px;
     padding: 10px 20px;
     font-size: 22px;
     color: #FFFFFF;
@@ -24,6 +29,7 @@ const FormContainer = styled.form`
     border-radius: 6px;
     border: none;
     background-color: #52B6FF;
+    opacity: ${({ canBeChanged }) => canBeChanged ? "1" : "0.7"};
   }
 `;
 
