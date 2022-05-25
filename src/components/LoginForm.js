@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { ThreeDots } from  'react-loader-spinner';
+import axios from "axios";
 import FormContainer from "./FormContainer";
-import { ThreeDots } from  'react-loader-spinner'
 
 export default function LoginForm() {
   const [ userEmail, setUserEmail ] = useState("");
@@ -20,6 +21,15 @@ export default function LoginForm() {
       email: userEmail,
       password: userPassword,
     }
+
+    const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body);
+
+    promise.catch(err => {
+      changeLoadLayout();
+      console.log("deu erro");
+    });
+
+    promise.then(response => console.log(response.data));
   }
 
   function verifyCanInteract(action) {
