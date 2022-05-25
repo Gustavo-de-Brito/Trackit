@@ -5,7 +5,9 @@ export default function LoginForm() {
   const [ userEmail, setUserEmail ] = useState("");
   const [ userPassword, setUserPassword ] = useState("");
 
-  function sendUserData() {
+  function sendUserData(e) {
+    e.preventDefault();
+
     const body = {
       email: userEmail,
       password: userPassword,
