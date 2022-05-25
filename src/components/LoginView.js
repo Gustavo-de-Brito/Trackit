@@ -8,7 +8,7 @@ export default function LoginView() {
     <LoginContent>
       <img src={logo} alt="trackit logo"/>
       <LoginForm />
-      <Link style={ {color: "#52B6FF", fontSize: "14px"} } to="/">
+      <Link style={ {color: "#52B6FF", fontSize: "14px"} } to="/cadastro">
         Não tem uma conta? Cadastre-se!
       </Link>
     </LoginContent>
