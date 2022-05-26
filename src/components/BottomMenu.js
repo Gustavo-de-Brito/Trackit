@@ -2,17 +2,27 @@ import styled from "styled-components";
 import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
 import { Link } from "react-router-dom";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 export default function BottomMenu() {
   const { userData } = useContext(UserContext);
+  const percentage = 30;
 
   return (
     <BottomBar userData={ userData }>
       <Link to="/habitos">
         <button>Hábitos</button>
       </Link>
-      <ProgressContent>
-        <Link to="/hoje">
+      <ProgressContent style={{position: "relative"}}>
+        <CircularProgressbar
+          value={percentage}
+          styles={buildStyles({
+            pathColor: "#FFFFFF",
+            strokeLinecap: "round"
+          })}
+          strokeWidth={10}
+        />
+        <Link to="/hoje" style={{position: "absolute", top: "38%", left:"24%"}}>
           <button>Hoje</button>
         </Link>
       </ProgressContent>
@@ -51,6 +61,7 @@ const ProgressContent = styled.div`
   align-items: center;
   width: 92px;
   height: 92px;
+  padding: 6px;
   border-radius: 50%;
   background-color: #52B6FF;
 
