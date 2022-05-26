@@ -7,6 +7,8 @@ import RegisterView from "./RegisterView";
 import TodayView from "./TodayView";
 import TopMenu from "./TopMenu";
 import BottomMenu from "./BottomMenu";
+import HabitsView from "./HabitsView";
+import HistoricView from "./HistoricView";
 
 export default function App() {
   const [ userData, setUserData ] = useState({});
@@ -21,6 +23,8 @@ export default function App() {
           <Route path="/" element={<LoginView />}  />
           <Route path="/cadastro" element={<RegisterView />}  />
           <Route path="/hoje" element={<TodayView />}  />
+          <Route path="/habitos" element={<HabitsView />}  />
+          <Route path="/historico" element={<HistoricView />}  />
         </Routes>
       </BrowserRouter>  
     </UserContext.Provider>

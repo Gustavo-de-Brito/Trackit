@@ -24,6 +24,7 @@ const TopBar = styled.div`
   padding: 10px 18px;
   position: fixed;
   background-color: #126BA5;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   color: #FFFFFF;
   top: 0;
   left: 0;

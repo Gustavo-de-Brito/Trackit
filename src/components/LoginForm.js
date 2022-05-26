@@ -7,8 +7,8 @@ import UserContext from "../contexts/UserContext";
 import FormContainer from "./FormContainer";
 
 export default function LoginForm() {
-  const [ userEmail, setUserEmail ] = useState("");
-  const [ userPassword, setUserPassword ] = useState("");
+  const [ userEmail, setUserEmail ] = useState("gustavo@email.com");
+  const [ userPassword, setUserPassword ] = useState("123456789");
   const [ canBeChanged, setCanBeChanged ] = useState(true);
 
   const { setUserData } = useContext(UserContext);
