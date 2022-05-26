@@ -1,12 +1,19 @@
 import { useState } from "react";
+import { useContext } from "react";
 import { ThreeDots } from  'react-loader-spinner';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import TokenContext from "../contexts/TokenContext";
 import FormContainer from "./FormContainer";
 
 export default function LoginForm() {
   const [ userEmail, setUserEmail ] = useState("");
   const [ userPassword, setUserPassword ] = useState("");
   const [ canBeChanged, setCanBeChanged ] = useState(true);
+
+  const { setUserData } = useContext(TokenContext);
+
+  const navigate = useNavigate();
 
   function changeLoadLayout() {
     setCanBeChanged(!canBeChanged);
@@ -29,7 +36,11 @@ export default function LoginForm() {
       setCanBeChanged(true);
     });
     
-    promise.then(response => console.log(response.data));
+    promise.then(response => {
+      setUserData(response.data);
+
+      navigate("/hoje");
+    });
   }
 
   function verifyCanInteract(action) {
@@ -45,7 +56,6 @@ export default function LoginForm() {
       <input value={ userEmail } onChange={ verifyCanInteract(e => setUserEmail(e.target.value)) } type="email" placeholder="email" required />
       <input value={ userPassword } onChange={ verifyCanInteract(e => setUserPassword(e.target.value)) } type="password" placeholder="senha" required />
       <button type="submit">{ canBeChanged ? "Entrar" : <ThreeDots color="#FFFFFF" height={14} width={60} /> }</button>
-      { canBeChanged ? <h1>PAU</h1> : <></>}
     </FormContainer>
   );
 }
