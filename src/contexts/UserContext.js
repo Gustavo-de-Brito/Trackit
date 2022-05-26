@@ -1,5 +1,5 @@
 import { createContext } from "react/cjs/react.production.min";
 
-const TokenContext = createContext();
+const UserContext = createContext();
 
-export default TokenContext;
+export default UserContext;
