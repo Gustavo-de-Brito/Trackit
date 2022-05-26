@@ -37,16 +37,19 @@ const BottomBar = styled.div`
   display: ${({ userData }) => userData.name !== undefined ? "flex" : "none" };
   justify-content: space-between;
   align-items: flex-end;
+  width: 100vw;
   max-height: 70px;
   padding: 10px 36px;
-  width: 100vw;
   background-color: #FFFFFF;
   position: fixed;
   bottom: 0;
   left: 0;
 
-  button {
+  a {
     align-self: center;
+  }
+
+  button {
     font-size: 18px;
     font-weight: bold;
     color: #52B6FF;
