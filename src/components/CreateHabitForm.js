@@ -1,13 +1,33 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import axios from "axios";
+import UserContext from "../contexts/UserContext";
 import DayButton from "./DayButton";
 
 export default function CreateHabitForm({ showHabitForm }) {
   const [ habitDescription, setHabitDescription ] = useState("");
   const [ selectedDays, setSelectedDays ] = useState([]);
 
+  const { userData } = useContext(UserContext);
+
   function setHabit(e) {
     e.preventDefault();
+
+    const body = {
+      name: habitDescription,
+      days: selectedDays,
+    }
+    
+    const header = {
+      headers: {
+        Authorization: `Bearer ${ userData.token }`
+      },  
+    }
+
+    const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, header);
+
+    promise.catch(err => console.log(`Ocorreu um erro: ${ err.response.data }`));
+    promise.then(response => console.log(response));
   }
 
   function setWeekday(id) {
@@ -18,10 +38,8 @@ export default function CreateHabitForm({ showHabitForm }) {
     }
   }
 
-  console.log(selectedDays);
-
   return (
-    <CreateForm onChange={ setHabit }>
+    <CreateForm onSubmit={ setHabit }>
       <input value={ habitDescription } onChange={ e => setHabitDescription(e.target.value) } placeholder="nome do hábito" required />
       <Weekdays>
         <DayButton key={0} numberDay={0} weekday={"D"} setWeekday={ setWeekday } />
