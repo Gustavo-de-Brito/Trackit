@@ -17,6 +17,12 @@ export default function CreateHabitForm({ showHabitForm }) {
 
     setCanBeChanged(false);
 
+    if(selectedDays.length === 0) {
+      setCanBeChanged(true);
+      alert("Selecione pelo menos um dia da semana para o hábito");
+      return;
+    }
+
     const body = {
       name: habitDescription,
       days: selectedDays,
@@ -32,7 +38,7 @@ export default function CreateHabitForm({ showHabitForm }) {
 
     promise.catch(err => {
       setCanBeChanged(true);
-      console.log(`Ocorreu um erro: ${ err.response.data }`);
+      alert("Não foi possível criar o novo hábito");
     });
 
     promise.then(response => console.log(response));
