@@ -1,16 +1,30 @@
 import styled from "styled-components";
-import ViewContent from "./ViewContent";
+import { useState } from "react";
 import { BiPlusMedical } from "react-icons/bi";
+import ViewContent from "./ViewContent";
+import CreateHabitForm from "./CreateHabitForm";
 
 export default function HabitsView() {
+  const [ createHabit, setCreateHabit ] = useState(false);
+
+  function showHabitForm() {
+    setCreateHabit(!createHabit);
+  }
+
   return (
     <ViewContent>
       <HabitsMenu>
         <h2>Meus hábitos</h2>
-        <button><BiPlusMedical style={{fontSize: "18px", color: "#FFFFFF"}} /></button>
+        <button onClick={ showHabitForm }><BiPlusMedical style={{fontSize: "18px", color: "#FFFFFF"}} /></button>
       </HabitsMenu>
       <RegisterHabits>
-        <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
+        {
+          createHabit
+          ?
+          <CreateHabitForm showHabitForm={ showHabitForm }/>
+          :
+          <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
+        }
       </RegisterHabits>
     </ViewContent>
   );
