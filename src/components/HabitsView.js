@@ -6,6 +6,38 @@ import CreateHabitForm from "./CreateHabitForm";
 import HabitsList from "./HabitsList";
 
 export default function HabitsView() {
+  const [ weekdays, setWeekdays ] = useState([
+    {
+      name: "D",
+      isSelected: false,
+    },
+    {
+      name: "S",
+      isSelected: false,
+    },
+    {
+      name: "T",
+      isSelected: false,
+    },
+    {
+      name: "Q",
+      isSelected: false,
+    },
+    {
+      name: "Q",
+      isSelected: false,
+    },
+    {
+      name: "S",
+      isSelected: false,
+    },
+    {
+      name: "S",
+      isSelected: false,
+    },
+  ]);
+
+  const [ habitDescription, setHabitDescription ] = useState("");
   const [ createHabit, setCreateHabit ] = useState(false);
 
   function showHabitForm() {
@@ -22,7 +54,7 @@ export default function HabitsView() {
         {
           createHabit
           ?
-          <CreateHabitForm showHabitForm={ showHabitForm }/>
+          <CreateHabitForm showHabitForm={ showHabitForm } weekdays={ weekdays } setWeekdays={ setWeekdays } habitDescription={ habitDescription } setHabitDescription={ setHabitDescription } />
           :
           <></>
         }

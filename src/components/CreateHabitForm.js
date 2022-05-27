@@ -5,39 +5,7 @@ import UserContext from "../contexts/UserContext";
 import { ThreeDots } from "react-loader-spinner";
 import WeekdaysList from "./WeekdaysList";
 
-export default function CreateHabitForm({ showHabitForm }) {
-  const [ weekdays, setWeekdays ] = useState([
-    {
-      name: "D",
-      isSelected: false,
-    },
-    {
-      name: "S",
-      isSelected: false,
-    },
-    {
-      name: "T",
-      isSelected: false,
-    },
-    {
-      name: "Q",
-      isSelected: false,
-    },
-    {
-      name: "Q",
-      isSelected: false,
-    },
-    {
-      name: "S",
-      isSelected: false,
-    },
-    {
-      name: "S",
-      isSelected: false,
-    },
-  ]);
-
-  const [ habitDescription, setHabitDescription ] = useState("");
+export default function CreateHabitForm({ showHabitForm, weekdays, setWeekdays, habitDescription, setHabitDescription }) {
   const [ canBeChanged, setCanBeChanged ] = useState(true);
 
   const { userData } = useContext(UserContext);
@@ -47,17 +15,25 @@ export default function CreateHabitForm({ showHabitForm }) {
 
     setCanBeChanged(false);
 
-    const selectedDays = weekdays.filter( weekday => weekday.isSelected === true);
+    const selectedDays = weekdays.map( (weekday, index) => {
+      if(weekday.isSelected === true) {
+        return index;
+      } else {
+        return undefined;
+      }
+    });
 
     if(selectedDays.length === 0) {
       setCanBeChanged(true);
       alert("Selecione pelo menos um dia da semana para o hábito");
       return;
     }
+    console.log(selectedDays);
+    console.log(selectedDays.filter( dayNumber => dayNumber !== undefined ));
 
     const body = {
       name: habitDescription,
-      days: selectedDays.map( day => day.dayNumber ),
+      days: selectedDays.filter( dayNumber => dayNumber !== undefined ),
     };
 
     const header = {
@@ -69,12 +45,15 @@ export default function CreateHabitForm({ showHabitForm }) {
     const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, header);
 
     promise.catch(err => {
-      setCanBeChanged(true);
-      setHabitDescription("");
       alert("Não foi possível criar o novo hábito");
     });
-
-    promise.then(response => console.log(response));
+    
+    promise.then(response => {
+      setCanBeChanged(true);
+      setHabitDescription("");
+      showHabitForm();
+      setWeekdays(weekdays.map( weekday => { return {...weekday, isSelected: false} }));
+    });
   }
 
   function setWeekday(dayNumber) {
