@@ -44,6 +44,7 @@ const BottomBar = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
+  z-index: 1;
 
   a {
     align-self: center;

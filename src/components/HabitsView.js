@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BiPlusMedical } from "react-icons/bi";
 import ViewContent from "./ViewContent";
 import CreateHabitForm from "./CreateHabitForm";
+import HabitsList from "./HabitsList";
 
 export default function HabitsView() {
   const [ createHabit, setCreateHabit ] = useState(false);
@@ -25,7 +26,7 @@ export default function HabitsView() {
           :
           <></>
         }
-        <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
+        <HabitsList />
       </RegisterHabits>
     </ViewContent>
   );

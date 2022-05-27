@@ -28,6 +28,7 @@ const TopBar = styled.div`
   color: #FFFFFF;
   top: 0;
   left: 0;
+  z-index: 1;
 
   h1 {
     font-size: 40px;

@@ -2,12 +2,42 @@ import styled from "styled-components";
 import { useState, useContext } from "react";
 import axios from "axios";
 import UserContext from "../contexts/UserContext";
-import DayButton from "./DayButton";
 import { ThreeDots } from "react-loader-spinner";
+import WeekdaysList from "./WeekdaysList";
 
 export default function CreateHabitForm({ showHabitForm }) {
+  const [ weekdays, setWeekdays ] = useState([
+    {
+      name: "D",
+      isSelected: false,
+    },
+    {
+      name: "S",
+      isSelected: false,
+    },
+    {
+      name: "T",
+      isSelected: false,
+    },
+    {
+      name: "Q",
+      isSelected: false,
+    },
+    {
+      name: "Q",
+      isSelected: false,
+    },
+    {
+      name: "S",
+      isSelected: false,
+    },
+    {
+      name: "S",
+      isSelected: false,
+    },
+  ]);
+
   const [ habitDescription, setHabitDescription ] = useState("");
-  const [ selectedDays, setSelectedDays ] = useState([]);
   const [ canBeChanged, setCanBeChanged ] = useState(true);
 
   const { userData } = useContext(UserContext);
@@ -17,6 +47,8 @@ export default function CreateHabitForm({ showHabitForm }) {
 
     setCanBeChanged(false);
 
+    const selectedDays = weekdays.filter( weekday => weekday.isSelected === true);
+
     if(selectedDays.length === 0) {
       setCanBeChanged(true);
       alert("Selecione pelo menos um dia da semana para o hábito");
@@ -25,30 +57,46 @@ export default function CreateHabitForm({ showHabitForm }) {
 
     const body = {
       name: habitDescription,
-      days: selectedDays,
-    }
-    
+      days: selectedDays.map( day => day.dayNumber ),
+    };
+
     const header = {
       headers: {
         Authorization: `Bearer ${ userData.token }`
-      },  
-    }
+      },
+    };
 
     const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, header);
 
     promise.catch(err => {
       setCanBeChanged(true);
+      setHabitDescription("");
       alert("Não foi possível criar o novo hábito");
     });
 
     promise.then(response => console.log(response));
   }
 
-  function setWeekday(id) {
-    if(selectedDays.includes(id)) {
-      setSelectedDays( selectedDays.filter( day => day !== id ));
+  function setWeekday(dayNumber) {
+    const selectedDay = weekdays.filter( (day, index) => index === dayNumber);
+
+    if( selectedDay[0].isSelected) {
+      setWeekdays( weekdays.map( (day, index) => {
+        if(index === dayNumber) {
+          return { ...day, isSelected: false };
+        } else {
+          return day;
+        }
+      }));
     } else {
-      setSelectedDays([...selectedDays, id]);
+      setWeekdays( weekdays.map( (day, index) => {
+        if(index === dayNumber) {
+          return { ...day, isSelected: true };
+        } else {
+          return day;
+        }
+      })
+      );
     }
   }
 
@@ -63,15 +111,7 @@ export default function CreateHabitForm({ showHabitForm }) {
   return (
     <CreateForm onSubmit={ canInteract(setHabit) } canBeChanged= { canBeChanged }>
       <input value={ habitDescription } onChange={ canInteract(e => setHabitDescription(e.target.value)) } placeholder="nome do hábito" required />
-      <Weekdays>
-        <DayButton key={0} numberDay={0} weekday={"D"} canInteract={ canInteract } setWeekday={ setWeekday } canBeChanged={ canBeChanged } />
-        <DayButton key={1} numberDay={1} weekday={"S"} canInteract={ canInteract } setWeekday={ setWeekday } canBeChanged={ canBeChanged } />
-        <DayButton key={2} numberDay={2} weekday={"T"} canInteract={ canInteract } setWeekday={ setWeekday } canBeChanged={ canBeChanged } />
-        <DayButton key={3} numberDay={3} weekday={"Q"} canInteract={ canInteract } setWeekday={ setWeekday } canBeChanged={ canBeChanged } />
-        <DayButton key={4} numberDay={4} weekday={"Q"} canInteract={ canInteract } setWeekday={ setWeekday } canBeChanged={ canBeChanged } />
-        <DayButton key={5} numberDay={5} weekday={"S"} canInteract={ canInteract } setWeekday={ setWeekday } canBeChanged={ canBeChanged } />
-        <DayButton key={6} numberDay={6} weekday={"S"} canInteract={ canInteract } setWeekday={ setWeekday } canBeChanged={ canBeChanged } />
-      </Weekdays>
+      <WeekdaysList weekdays={ weekdays } setWeekday={ setWeekday } canInteract={ canInteract } canBeChanged={ canBeChanged } />
       <ActionButtons canBeChanged={ canBeChanged }>
         <button onClick={ canInteract(showHabitForm) }>Cancelar</button>
         <button type="submit">{ canBeChanged ? "Salvar" : <ThreeDots color="#FFFFFF" height={10} width={42} /> }</button>
@@ -106,12 +146,6 @@ const CreateForm = styled.form`
   input::placeholder {
     color: #D4D4D4;
   }
-`;
-
-const Weekdays = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
 `;
 
 const ActionButtons = styled.div`
