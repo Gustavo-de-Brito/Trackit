@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function DayButton({ numberDay, weekday, setWeekday }) {
+export default function DayButton({ numberDay, weekday, canInteract, setWeekday, canBeChanged }) {
   const [ selected, setSelected ] = useState(false);
 
   function selectWeekday(e) {
@@ -12,7 +12,9 @@ export default function DayButton({ numberDay, weekday, setWeekday }) {
   }
 
   return (
-    <WeekdayButton selected={selected} onClick={ selectWeekday }>{ weekday }</WeekdayButton>
+    <WeekdayButton selected={selected} onClick={ canInteract(selectWeekday) } canBeChanged={canBeChanged}>
+      { weekday }
+    </WeekdayButton>
   );
 };
 
@@ -25,4 +27,5 @@ const WeekdayButton = styled.button`
   border-radius: 4px;
   border: 1px solid #D4D4D4;
   background-color: ${ ({ selected }) => selected ? "#D4D4D4" : "#FFFFFF" };
+  opacity: ${({ canBeChanged }) => canBeChanged ? "1" : "0.7"};
 `;

@@ -23,8 +23,9 @@ export default function HabitsView() {
           ?
           <CreateHabitForm showHabitForm={ showHabitForm }/>
           :
-          <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
+          <></>
         }
+        <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
       </RegisterHabits>
     </ViewContent>
   );
