@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import FormContainer from "./FormContainer";
+import FormContainer from "../FormContainer";
 import { ThreeDots } from  'react-loader-spinner'
 
 export default function RegisterForm() {

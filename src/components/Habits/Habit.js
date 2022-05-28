@@ -3,6 +3,7 @@ import { BsTrash } from "react-icons/bs";
 
 export default function Habit({ name, days }) {
   const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
+
   const formatedWeekdays = weekdays.map( (day, index) => {
     if(days.includes(index)) {
       return { name: day, isSelected: true };

@@ -1,11 +1,33 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { BiPlusMedical } from "react-icons/bi";
-import ViewContent from "./ViewContent";
+import axios from "axios";
+import UserContext from "../../contexts/UserContext";
+import ViewContent from "../ViewContent";
 import CreateHabitForm from "./CreateHabitForm";
 import HabitsList from "./HabitsList";
 
 export default function HabitsView() {
+  const [ habitsList, setHabitsList ] = useState([]);
+  const { userData } = useContext(UserContext);
+
+  function getHabits() {
+    const header = {
+      headers: {
+        Authorization: `Bearer ${ userData.token }`
+      }
+    }
+
+    const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", header);
+
+    promise.catch(err => console.log(`Ocorreu um erro na promise de hábitos, status: ${ err.response.status }`));
+    promise.then(response => setHabitsList(response.data));
+  }
+
+  useEffect(() => {
+    getHabits();
+  }, []);
+
   const [ weekdays, setWeekdays ] = useState([
     {
       name: "D",
@@ -54,11 +76,18 @@ export default function HabitsView() {
         {
           createHabit
           ?
-          <CreateHabitForm showHabitForm={ showHabitForm } weekdays={ weekdays } setWeekdays={ setWeekdays } habitDescription={ habitDescription } setHabitDescription={ setHabitDescription } />
+          <CreateHabitForm
+            getHabits={ getHabits }
+            showHabitForm={ showHabitForm }
+            weekdays={ weekdays }
+            setWeekdays={ setWeekdays }
+            habitDescription={ habitDescription }
+            setHabitDescription={ setHabitDescription }
+          />
           :
           <></>
         }
-        <HabitsList />
+        <HabitsList habitsList={ habitsList }/>
       </RegisterHabits>
     </ViewContent>
   );

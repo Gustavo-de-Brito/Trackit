@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.svg";
+import logo from "../../assets/images/logo.svg";
 import LoginForm from "./LoginForm";
-import EntraceContainer from "./EntraceContainer";
+import EntraceContainer from "../EntraceContainer";
 
 export default function LoginView() {
   return (

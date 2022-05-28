@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useState, useContext } from "react";
 import axios from "axios";
-import UserContext from "../contexts/UserContext";
+import UserContext from "../../contexts/UserContext";
 import { ThreeDots } from "react-loader-spinner";
-import WeekdaysList from "./WeekdaysList";
+import WeekdaysList from "../shared/WeekdaysList";
 
-export default function CreateHabitForm({ showHabitForm, weekdays, setWeekdays, habitDescription, setHabitDescription }) {
+export default function CreateHabitForm({ getHabits, showHabitForm, weekdays, setWeekdays, habitDescription, setHabitDescription }) {
   const [ canBeChanged, setCanBeChanged ] = useState(true);
 
   const { userData } = useContext(UserContext);
@@ -28,8 +28,6 @@ export default function CreateHabitForm({ showHabitForm, weekdays, setWeekdays, 
       alert("Selecione pelo menos um dia da semana para o hábito");
       return;
     }
-    console.log(selectedDays);
-    console.log(selectedDays.filter( dayNumber => dayNumber !== undefined ));
 
     const body = {
       name: habitDescription,
@@ -52,6 +50,7 @@ export default function CreateHabitForm({ showHabitForm, weekdays, setWeekdays, 
       setCanBeChanged(true);
       setHabitDescription("");
       showHabitForm();
+      getHabits();
       setWeekdays(weekdays.map( weekday => { return {...weekday, isSelected: false} }));
     });
   }

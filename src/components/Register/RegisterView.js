@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.svg";
-import EntraceContainer from "./EntraceContainer";
+import logo from "../../assets/images/logo.svg";
+import EntraceContainer from "../EntraceContainer";
 import RegisterForm from "./RegisterForm";
 
 export default function RegisterView() {

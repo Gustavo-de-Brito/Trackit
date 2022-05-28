@@ -7,10 +7,9 @@ export default function WeekdaysList({ weekdays, setWeekday, canInteract, canBeC
       { weekdays.map( (weekday, index) => {
         return (
           <DayButton
-            key={index}
-            numberDay={index}
-            weekday={weekday.name}
-            isSelected={weekday.isSelected}
+            key={ index }
+            numberDay={ index }
+            weekday={ weekday }
             setWeekday={ setWeekday }
             canInteract={ canInteract }
             canBeChanged={ canBeChanged }

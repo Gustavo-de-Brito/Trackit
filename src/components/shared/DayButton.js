@@ -1,7 +1,7 @@
-import { useState } from "react";
 import styled from "styled-components";
 
-export default function DayButton({ numberDay, weekday, isSelected, setWeekday, canInteract, canBeChanged }) {
+export default function DayButton({ numberDay, weekday, setWeekday, canInteract, canBeChanged }) {
+
   function selectWeekday(e) {
     e.preventDefault();
 
@@ -9,8 +9,8 @@ export default function DayButton({ numberDay, weekday, isSelected, setWeekday, 
   }
 
   return (
-    <WeekdayButton isSelected={isSelected} onClick={ canInteract(selectWeekday) } canBeChanged={canBeChanged}>
-      { weekday }
+    <WeekdayButton isSelected={weekday.isSelected} onClick={ canInteract(selectWeekday) } canBeChanged={canBeChanged}>
+      { weekday.name }
     </WeekdayButton>
   );
 };

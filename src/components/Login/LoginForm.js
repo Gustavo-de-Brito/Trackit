@@ -3,8 +3,8 @@ import { useContext } from "react";
 import { ThreeDots } from  'react-loader-spinner';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import UserContext from "../contexts/UserContext";
-import FormContainer from "./FormContainer";
+import UserContext from "../../contexts/UserContext";
+import FormContainer from "../FormContainer";
 
 export default function LoginForm() {
   const [ userEmail, setUserEmail ] = useState("gustavo@email.com");
