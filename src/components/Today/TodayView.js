@@ -16,6 +16,7 @@ export default function TodayView() {
   // Configurando os dias da semana para serem em português
   dayjs.extend(localeData);
   dayjs.locale('pt-br');
+
   const weekday = dayjs.localeData().weekdays()[dayjs().day()];
   const dayMonth = dayjs().format("DD/MM");
 
@@ -29,20 +30,24 @@ export default function TodayView() {
     setPercentProgress(Math.round(percentDone));
   }
 
-  useEffect(() => {
+  function requestHabits() {
     const header = {
       headers: {
         Authorization: `Bearer ${userData.token}`,
       },
     };
-
+  
     const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", header);
-
+  
     promise.catch(err => console.log(`Erro ao listar hábitos a fazer, status: ${ err.response.status }`));
     promise.then(response => {
       setHabitsList(response.data);
       calculetePercent(response.data);
     });
+  }
+
+  useEffect(() => {
+    requestHabits();
   }, []);
 
   return (
@@ -53,7 +58,7 @@ export default function TodayView() {
           { percentProgress === 0 ? "Nenhum hábito concluído ainda" : <span>{percentProgress}% dos hábitos concluídos</span> }
         </h3>
       </TodayInfo>
-      <TodoHabits habitsList={ habitsList } />
+      <TodoHabits habitsList={ habitsList } requestHabits={ requestHabits } />
     </ViewContent>
   );
 }

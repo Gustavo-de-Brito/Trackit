@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import DoHabit from "./DoHabit";
 
-export default function TodoHabits({ habitsList }) {
+export default function TodoHabits({ habitsList, requestHabits }) {
   return (
     <HabitsList>
       {
@@ -9,7 +9,7 @@ export default function TodoHabits({ habitsList }) {
         ?
           <></>
         :
-          habitsList.map( habit => <DoHabit key={habit.id} habit={ habit } /> )}
+          habitsList.map( habit => <DoHabit key={habit.id} habit={ habit } requestHabits={ requestHabits } /> )}
     </HabitsList>
   );
 }
