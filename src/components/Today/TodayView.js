@@ -49,7 +49,9 @@ export default function TodayView() {
     <ViewContent>
       <TodayInfo>
         <h2>{ date }</h2>
-        <h3>{ percentProgress === 0 ? "Nenhum hábito concluído ainda" : `${percentProgress}% dos hábitos concluídos` }</h3>
+        <h3>
+          { percentProgress === 0 ? "Nenhum hábito concluído ainda" : <span>{percentProgress}% dos hábitos concluídos</span> }
+        </h3>
       </TodayInfo>
       <TodoHabits habitsList={ habitsList } />
     </ViewContent>
@@ -71,5 +73,9 @@ const TodayInfo = styled.div`
   h3 {
     font-size: 18px;
     color: #BABABA;
+  }
+
+  h3 > span {
+    color: #8FC549;
   }
 `;
