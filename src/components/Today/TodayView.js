@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import 'dayjs/locale/pt-br';
+import dayjs from "dayjs";
+import localeData from 'dayjs/plugin/localeData';
 import UserContext from "../../contexts/UserContext";
 import ViewContent from "../ViewContent";
 import TodoHabits from "./TodoHabits";
@@ -9,6 +12,15 @@ export default function TodayView() {
   const [ habitsList, setHabitsList ] = useState([]);
   const [ percentProgress, setPercentProgress ] = useState(0);
   const { userData } = useContext(UserContext);
+
+  // Configurando os dias da semana para serem em português
+  dayjs.extend(localeData);
+  dayjs.locale('pt-br');
+  const weekday = dayjs.localeData().weekdays()[dayjs().day()];
+  const dayMonth = dayjs().format("DD/MM");
+
+  const date = `${ weekday[0].toUpperCase() + weekday.slice(1) }, ${dayMonth}`
+
 
   function calculetePercent(habits) {
     const doneHabits = habits.filter( habit => habit.done );
@@ -36,7 +48,7 @@ export default function TodayView() {
   return (
     <ViewContent>
       <TodayInfo>
-        <h2>Dia da semana, dia/mês</h2>
+        <h2>{ date }</h2>
         <h3>{ percentProgress === 0 ? "Nenhum hábito concluído ainda" : `${percentProgress}% dos hábitos concluídos` }</h3>
       </TodayInfo>
       <TodoHabits habitsList={ habitsList } />
@@ -49,14 +61,13 @@ const TodayInfo = styled.div`
   flex-direction: column;
   margin-top: 20px;
   padding: 0 18px;
-  font-weight: bold;
-
+  
   h2  {
     margin-bottom: 8px;
     font-size: 22px;
     color: #126BA5;
   }
-
+  
   h3 {
     font-size: 18px;
     color: #BABABA;
