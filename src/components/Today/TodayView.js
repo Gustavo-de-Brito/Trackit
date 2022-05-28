@@ -5,13 +5,14 @@ import 'dayjs/locale/pt-br';
 import dayjs from "dayjs";
 import localeData from 'dayjs/plugin/localeData';
 import UserContext from "../../contexts/UserContext";
+import HabitContext from "../../contexts/HabitsContext";
 import ViewContent from "../ViewContent";
 import TodoHabits from "./TodoHabits";
 
 export default function TodayView() {
   const [ habitsList, setHabitsList ] = useState([]);
-  const [ percentProgress, setPercentProgress ] = useState(0);
   const { userData } = useContext(UserContext);
+  const { percentProgress, setPercentProgress} = useContext(HabitContext);
 
   // Configurando os dias da semana para serem em português
   dayjs.extend(localeData);

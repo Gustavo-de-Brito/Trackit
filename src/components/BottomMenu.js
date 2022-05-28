@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { useContext } from "react";
-import UserContext from "../contexts/UserContext";
 import { Link } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import UserContext from "../contexts/UserContext";
+import HabitContext from "../contexts/HabitsContext";
 
 export default function BottomMenu() {
   const { userData } = useContext(UserContext);
-  const percentage = 30;
+  const { percentProgress} = useContext(HabitContext);
 
   return (
     <BottomBar userData={ userData }>
@@ -15,11 +16,12 @@ export default function BottomMenu() {
       </Link>
       <ProgressContent style={{position: "relative"}}>
         <CircularProgressbar
-          value={percentage}
-          styles={buildStyles({
+          value={ percentProgress }
+          styles={ buildStyles({
             pathColor: "#FFFFFF",
             strokeLinecap: "round"
-          })}
+          })
+        }
           strokeWidth={10}
         />
         <Link to="/hoje" style={{position: "absolute", top: "38%", left:"24%"}}>
