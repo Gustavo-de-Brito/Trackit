@@ -4,7 +4,7 @@ import UserContext from "../contexts/UserContext";
 import GlobalStyle from "../theme/globalStyle";
 import LoginView from "./Login/LoginView";
 import RegisterView from "./Register/RegisterView";
-import TodayView from "./TodayView";
+import TodayView from "./Today/TodayView";
 import TopMenu from "./TopMenu";
 import BottomMenu from "./BottomMenu";
 import HabitsView from "./Habits/HabitsView";

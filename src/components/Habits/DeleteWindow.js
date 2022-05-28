@@ -44,7 +44,7 @@ export default function DeleteWindow({ habitId, setShowDeleteWindow, getHabits }
           <button onClick={ isLoading ? () => "" : deleteHabit }>
             { isLoading ? <ThreeDots color="#FFFFFF" height={10} width={32} /> : "Sim" }
           </button>
-          <button onClick={ cancelDelete }>Não</button>
+          <button onClick={ isLoading ? () => "" : cancelDelete }>Não</button>
         </Buttons>
       </ConfirmDelete>
     </>
