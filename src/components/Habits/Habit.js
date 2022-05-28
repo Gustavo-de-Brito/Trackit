@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import { useState } from "react";
 import { BsTrash } from "react-icons/bs";
+import DeleteWindow from "./DeleteWindow";
 
-export default function Habit({ name, days }) {
+export default function Habit({ id, name, days, getHabits }) {
   const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
+  const [ showDeleteWindow, setShowDeleteWindow ] = useState(false);
 
   const formatedWeekdays = weekdays.map( (day, index) => {
     if(days.includes(index)) {
@@ -12,13 +15,18 @@ export default function Habit({ name, days }) {
     }
   });
 
+  function deleteHabit() {
+    setShowDeleteWindow(true);
+  }
+
   return (
     <HabitItem>
       <h3>{ name }</h3>
-      <BsTrash style={{ position: "absolute", top: "10px", right: "12px" }} />
+      <BsTrash onClick={ deleteHabit } style={{ position: "absolute", top: "10px", right: "12px" }} />
       <Weekdays>
         { formatedWeekdays.map( (day, index) => <WeekdayButton key={ index } isSelected={ day.isSelected }>{day.name}</WeekdayButton>)}
       </Weekdays>
+      { showDeleteWindow ? <DeleteWindow habitId={ id } setShowDeleteWindow={ setShowDeleteWindow } getHabits={ getHabits }/> : <></> }
     </HabitItem>
   );
 }

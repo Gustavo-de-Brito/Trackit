@@ -87,7 +87,7 @@ export default function HabitsView() {
           :
           <></>
         }
-        <HabitsList habitsList={ habitsList }/>
+        <HabitsList getHabits={ getHabits } habitsList={ habitsList }/>
       </RegisterHabits>
     </ViewContent>
   );
