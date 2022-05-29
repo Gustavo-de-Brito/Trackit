@@ -40,15 +40,17 @@ export default function DeleteWindow({ habitId, setShowDeleteWindow, getHabits }
   return (
     <>
       <ShadowBackground />
-      <ConfirmDelete>
-        <h3>Deseja realmente excluir esse hábito?</h3>
-        <Buttons>
-          <button onClick={ isLoading ? () => "" : deleteHabit }>
-            { isLoading ? <ThreeDots color="#FFFFFF" height={10} width={32} /> : "Sim" }
-          </button>
-          <button onClick={ isLoading ? () => "" : cancelDelete }>Não</button>
-        </Buttons>
-      </ConfirmDelete>
+      <TransparentBackground>
+          <ConfirmDelete>
+            <h3>Deseja realmente excluir esse hábito?</h3>
+            <Buttons>
+                <button onClick={ isLoading ? () => "" : deleteHabit }>
+                  { isLoading ? <ThreeDots color="#FFFFFF" height={10} width={32} /> : "Sim" }
+                </button>
+                <button onClick={ isLoading ? () => "" : cancelDelete }>Não</button>
+            </Buttons>
+          </ConfirmDelete>
+      </TransparentBackground>
     </>
   );
 }
@@ -57,12 +59,24 @@ const ShadowBackground = styled.div`
   width: 100vw;
   height: 100vh;
   padding: 0 30px;
-  background-color: black;
+  background-color: #126BA5;
   opacity: 0.9;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 2;
+`;
+
+const TransparentBackground = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
 `;
 
 const ConfirmDelete = styled.div`
@@ -73,10 +87,6 @@ const ConfirmDelete = styled.div`
   padding: 30px 20px;
   background-color: #FFFFFF;
   border-radius: 8px;
-  position: fixed;
-  top: 32%;
-  left: 0;
-  z-index: 3;
 
   h3 {
     text-align: center;
@@ -87,6 +97,7 @@ const ConfirmDelete = styled.div`
 
 const Buttons = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
   width: 100%;

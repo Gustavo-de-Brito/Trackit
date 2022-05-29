@@ -52,6 +52,7 @@ const Habit = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   margin-bottom: 10px;
   padding: 14px;
   background-color: #FFFFFF;
@@ -61,9 +62,13 @@ const Habit = styled.li`
 const HabitInfo = styled.div`
   display: flex;
   flex-direction: column;
+  width: 76%;
+  padding-right: 6px;
   color: #666666;
 
   h3 {
+    width: 100%;
+    word-wrap: break-word;
     margin-bottom: 10px;
     font-size: 20px;
     font-weight: bold;

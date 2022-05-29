@@ -15,7 +15,7 @@ export default function CreateHabitForm({ getHabits, showHabitForm, weekdays, se
 
     setCanBeChanged(false);
 
-    const selectedDays = weekdays.map( (weekday, index) => {
+    const indexDays = weekdays.map( (weekday, index) => {
       if(weekday.isSelected === true) {
         return index;
       } else {
@@ -23,7 +23,9 @@ export default function CreateHabitForm({ getHabits, showHabitForm, weekdays, se
       }
     });
 
-    if(selectedDays.length === 0) {
+    const selectedIndexes = indexDays.filter( dayNumber => dayNumber !== undefined );
+
+    if(selectedIndexes.length === 0) {
       setCanBeChanged(true);
       alert("Selecione pelo menos um dia da semana para o hábito");
       return;
@@ -33,7 +35,7 @@ export default function CreateHabitForm({ getHabits, showHabitForm, weekdays, se
 
     const body = {
       name: habitDescription,
-      days: selectedDays.filter( dayNumber => dayNumber !== undefined ),
+      days: selectedIndexes,
     };
 
     const header = {

@@ -35,6 +35,7 @@ const HabitItem = styled.li`
   width: 100%;
   margin-bottom: 10px;
   padding: 16px;
+  padding-right: 30px;
   border-radius: 4px;
   background-color: #FFFFFF;
   position: relative;
@@ -42,6 +43,7 @@ const HabitItem = styled.li`
 
   h3 {
     font-size: 20px;
+    word-wrap: break-word;
   }
 `;
 
