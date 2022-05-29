@@ -18,6 +18,8 @@ export default function RegisterForm() {
   }
 
   function sendUserData() {
+    const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
+
     const body = {
       email: userEmail,
       password: userPassword,
@@ -25,12 +27,13 @@ export default function RegisterForm() {
       image: userPhoto,
     };
 
-    const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body);
+    const promise = axios.post(URL, body);
 
     promise.catch(err => {
       alert("Ocorreu um erro ao tentar registrar as informações");
       setCanBeChanged(true);
     });
+
     promise.then(response => navigate("/"));
   }
 
@@ -42,9 +45,9 @@ export default function RegisterForm() {
     const image = new Image();
     image.src = userPhoto;
     image.onerror = () => {
-      alert("A URL da imagem é inválida")
+      alert("A URL da imagem é inválida");
       setCanBeChanged(true);
-    };
+    }
 
     image.onload = () => sendUserData();
   }

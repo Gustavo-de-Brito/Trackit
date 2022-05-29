@@ -5,7 +5,7 @@ export default function HabitsList({ getHabits, habitsList }) {
   return (
     <Habits>
       { 
-        habitsList.length !== 0 
+        habitsList.length !== 0
         ?
           habitsList.map( habit => <Habit key={habit.id} id={habit.id} name= {habit.name } days={ habit.days } getHabits={ getHabits } /> )
         :

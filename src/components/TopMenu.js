@@ -44,4 +44,4 @@ const ProfileContainer = styled.div`
     width: 52px;
     height: 52px;
   }
-`
+`;

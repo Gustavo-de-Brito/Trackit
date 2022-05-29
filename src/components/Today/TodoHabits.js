@@ -17,4 +17,4 @@ export default function TodoHabits({ habitsList, requestHabits }) {
 const HabitsList = styled.ul`
   margin: 28px 0 0 0;
   padding: 0 18px;
-`
+`;

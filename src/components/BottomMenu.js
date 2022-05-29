@@ -17,11 +17,12 @@ export default function BottomMenu() {
       <ProgressContent style={{position: "relative"}}>
         <CircularProgressbar
           value={ percentProgress }
-          styles={ buildStyles({
-            pathColor: "#FFFFFF",
-            strokeLinecap: "round"
-          })
-        }
+          styles={
+            buildStyles({
+              pathColor: "#FFFFFF",
+              strokeLinecap: "round",
+            })
+          }
           strokeWidth={10}
         />
         <Link to="/hoje" style={{position: "absolute", top: "38%", left:"24%"}}>

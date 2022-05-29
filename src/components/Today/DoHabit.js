@@ -11,39 +11,27 @@ export default function DoHabit({ habit, requestHabits }) {
   function markDone() {
     setIsLoading(true);
 
+    const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${ habit.id }`;
+
     const header = {
       headers: {
         Authorization: `Bearer ${userData.token}`,
       },
     };
 
-    if( habit.done ) {
-  
-      const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${ habit.id }/uncheck`, habit, header);
-  
-      promise.catch(err => {
-        console.log(`ocorreu um erro ao marcar habito como não concluido, status: ${err.response.status}`);
-        setIsLoading(false);
-      });
-      
-      promise.then(response => {
-        requestHabits();
-        setIsLoading(false);
-      });
+    const habitStatus = habit.done ? "uncheck" : "check";
 
-    } else {
-      const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${ habit.id }/check`, habit, header);
-  
-      promise.catch(err => {
-        console.log(`ocorreu um erro ao marcar habito como concluido, status: ${err.response.status}`);
-        setIsLoading(false);
-      });
-      
-      promise.then(response => {
-        requestHabits();
-        setIsLoading(false);
-      });
-    }
+    const promise = axios.post(`${ URL }/${ habitStatus }`, habit, header);
+
+    promise.catch(err => {
+      console.log(`ocorreu um erro ao tentar mudar o estado do habito para ${ habitStatus }, status: ${err.response.status}`);
+      setIsLoading(false);
+    });
+
+    promise.then(response => {
+      requestHabits();
+      setIsLoading(false);
+    });
   }
 
   return (
@@ -91,7 +79,7 @@ const HabitInfo = styled.div`
   }
 
   p:last-child > span {
-    color: ${ ({ habit }) => habit.currentSequence === habit.highestSequence ? "#8FC549" : "#666666" }
+    color: ${ ({ habit }) => habit.currentSequence === habit.highestSequence ? "#8FC549" : "#666666" };
   }
 `;
 

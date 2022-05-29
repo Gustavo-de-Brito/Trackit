@@ -13,7 +13,7 @@ export default function WeekdaysList({ weekdays, setWeekday, canInteract, canBeC
             setWeekday={ setWeekday }
             canInteract={ canInteract }
             canBeChanged={ canBeChanged }
-          />)
+          />);
         })
       }
     </Weekdays>

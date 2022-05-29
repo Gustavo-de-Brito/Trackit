@@ -29,7 +29,7 @@ export default function App() {
             <Route path="/habitos" element={<HabitsView />}  />
             <Route path="/historico" element={<HistoryView />}  />
           </Routes>
-        </BrowserRouter>  
+        </BrowserRouter>
       </HabitContext.Provider>
     </UserContext.Provider>
   );

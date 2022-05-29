@@ -16,7 +16,7 @@ const FormContainer = styled.form`
     border-radius: 6px;
     color: ${({ canBeChanged }) => canBeChanged ? "#000000": "#AFAFAF"};
   }
-  
+
   button {
     display: flex;
     justify-content: center;

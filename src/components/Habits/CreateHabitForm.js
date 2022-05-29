@@ -29,6 +29,8 @@ export default function CreateHabitForm({ getHabits, showHabitForm, weekdays, se
       return;
     }
 
+    const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+
     const body = {
       name: habitDescription,
       days: selectedDays.filter( dayNumber => dayNumber !== undefined ),
@@ -36,16 +38,16 @@ export default function CreateHabitForm({ getHabits, showHabitForm, weekdays, se
 
     const header = {
       headers: {
-        Authorization: `Bearer ${ userData.token }`
+        Authorization: `Bearer ${ userData.token }`,
       },
     };
 
-    const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, header);
+    const promise = axios.post(URL, body, header);
 
     promise.catch(err => {
       alert("Não foi possível criar o novo hábito");
     });
-    
+
     promise.then(response => {
       setCanBeChanged(true);
       setHabitDescription("");
@@ -66,6 +68,7 @@ export default function CreateHabitForm({ getHabits, showHabitForm, weekdays, se
           return day;
         }
       }));
+
     } else {
       setWeekdays( weekdays.map( (day, index) => {
         if(index === dayNumber) {
@@ -102,7 +105,7 @@ const CreateForm = styled.form`
   padding: 18px;
   background-color: #FFFFFF;
   border-radius: 4px;
-  
+
   input {
     width: 100%;
     padding: 10px;
@@ -138,7 +141,7 @@ const ActionButtons = styled.div`
     font-weight: bold;
     opacity: ${({ canBeChanged }) => canBeChanged ? "1" : "0.7"};
   }
-  
+
   button:first-child {
     color: #52B6FF;
     background-color: transparent;

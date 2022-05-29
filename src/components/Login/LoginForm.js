@@ -24,18 +24,20 @@ export default function LoginForm() {
 
     changeLoadLayout();
 
+    const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
+
     const body = {
       email: userEmail,
       password: userPassword,
-    }
+    };
 
-    const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body);
+    const promise = axios.post(URL, body);
 
     promise.catch(() => {
       alert("Não foi possível realizar o login");
       setCanBeChanged(true);
     });
-    
+
     promise.then(response => {
       setUserData(response.data);
 

@@ -12,13 +12,15 @@ export default function DeleteWindow({ habitId, setShowDeleteWindow, getHabits }
   function deleteHabit() {
     setIsLoading(true);
 
+    const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitId}`;
+
     const header = {
       headers: {
         Authorization: `Bearer ${userData.token}`,
       },
     };
 
-    const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitId}`, header);
+    const promise = axios.delete(URL, header);
 
     promise.catch(err => {
       alert("Erro ao tentar apagar o hábito");

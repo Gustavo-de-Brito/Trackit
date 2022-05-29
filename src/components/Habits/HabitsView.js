@@ -12,13 +12,15 @@ export default function HabitsView() {
   const { userData } = useContext(UserContext);
 
   function getHabits() {
+    const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+
     const header = {
       headers: {
-        Authorization: `Bearer ${ userData.token }`
-      }
-    }
+        Authorization: `Bearer ${ userData.token }`,
+      },
+    };
 
-    const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", header);
+    const promise = axios.get(URL, header);
 
     promise.catch(err => console.log(`Ocorreu um erro na promise de hábitos, status: ${ err.response.status }`));
     promise.then(response => setHabitsList(response.data));

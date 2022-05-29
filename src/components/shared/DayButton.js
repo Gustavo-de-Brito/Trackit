@@ -13,7 +13,7 @@ export default function DayButton({ numberDay, weekday, setWeekday, canInteract,
       { weekday.name }
     </WeekdayButton>
   );
-};
+}
 
 const WeekdayButton = styled.button`
   margin-right: 6px;

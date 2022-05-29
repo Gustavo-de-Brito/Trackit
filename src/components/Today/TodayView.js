@@ -23,7 +23,6 @@ export default function TodayView() {
 
   const date = `${ weekday[0].toUpperCase() + weekday.slice(1) }, ${dayMonth}`
 
-
   function calculetePercent(habits) {
     const doneHabits = habits.filter( habit => habit.done );
 
@@ -32,14 +31,16 @@ export default function TodayView() {
   }
 
   function requestHabits() {
+    const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
+
     const header = {
       headers: {
         Authorization: `Bearer ${userData.token}`,
       },
     };
-  
-    const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", header);
-  
+
+    const promise = axios.get(URL, header);
+
     promise.catch(err => console.log(`Erro ao listar hábitos a fazer, status: ${ err.response.status }`));
     promise.then(response => {
       setHabitsList(response.data);
@@ -69,13 +70,13 @@ const TodayInfo = styled.div`
   flex-direction: column;
   margin-top: 20px;
   padding: 0 18px;
-  
+
   h2  {
     margin-bottom: 8px;
     font-size: 22px;
     color: #126BA5;
   }
-  
+
   h3 {
     font-size: 18px;
     color: #BABABA;
