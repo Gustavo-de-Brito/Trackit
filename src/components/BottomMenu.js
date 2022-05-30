@@ -1,16 +1,18 @@
 import styled from "styled-components";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import UserContext from "../contexts/UserContext";
 import HabitContext from "../contexts/HabitsContext";
 
 export default function BottomMenu() {
-  const { userData } = useContext(UserContext);
   const { percentProgress} = useContext(HabitContext);
 
+  const locate = useLocation();
+
+  const showComponent = locate.pathname !== "/" && locate.pathname !== "/cadastro";
+
   return (
-    <BottomBar userData={ userData }>
+    <BottomBar showComponent={ showComponent }>
       <Link to="/habitos">
         <button>Hábitos</button>
       </Link>
@@ -37,7 +39,7 @@ export default function BottomMenu() {
 }
 
 const BottomBar = styled.div`
-  display: ${({ userData }) => userData.name !== undefined ? "flex" : "none" };
+  display: ${({ showComponent }) => showComponent ? "flex" : "none" };
   justify-content: space-between;
   align-items: flex-end;
   width: 100vw;

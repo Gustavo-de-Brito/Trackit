@@ -84,7 +84,7 @@ const HabitInfo = styled.div`
   }
 
   p:last-child > span {
-    color: ${ ({ habit }) => habit.currentSequence === habit.highestSequence ? "#8FC549" : "#666666" };
+    color: ${ ({ habit }) => habit.currentSequence === habit.highestSequence && habit.highestSequence !== 0 ? "#8FC549" : "#666666" };
   }
 `;
 

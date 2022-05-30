@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { ThreeDots } from  'react-loader-spinner';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,11 +6,11 @@ import UserContext from "../../contexts/UserContext";
 import FormContainer from "../FormContainer";
 
 export default function LoginForm() {
-  const [ userEmail, setUserEmail ] = useState("");
+  const { setUserData } = useContext(UserContext);
+
+  const [ userEmail, setUserEmail ] = useState("" );
   const [ userPassword, setUserPassword ] = useState("");
   const [ canBeChanged, setCanBeChanged ] = useState(true);
-
-  const { setUserData } = useContext(UserContext);
 
   const navigate = useNavigate();
 

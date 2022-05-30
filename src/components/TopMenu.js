@@ -1,22 +1,26 @@
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
 
 export default function TopMenu() {
+  const locate = useLocation();
   const { userData } = useContext(UserContext);
 
+  const showComponent = locate.pathname !== "/" && locate.pathname !== "/cadastro";
+
   return (
-    <TopBar userData={ userData } >
+    <TopBar showComponent={ showComponent } >
       <h1>TrackIt</h1>
       <ProfileContainer>
-        <img src={ userData.image } alt="foto-perfil" />
+        <img src={userData.image } alt="foto-perfil" />
       </ProfileContainer>
     </TopBar>
   );
 }
 
 const TopBar = styled.div`
-  display: ${ ({ userData }) => userData.image !== undefined ? "flex" : "none" };
+  display: ${ ({showComponent }) => showComponent ? "flex" : "none" };
   justify-content: space-between;
   align-items: center;
   width: 100vw;
