@@ -5,8 +5,6 @@
 
 Uma aplicação front-end voltada para mobile, com o intuito de permitir ao usuário criar e monitorar seus hábitos.
 
-## Layout
-
 ## Tecnologias utilizadas
 
 - JavaScript
