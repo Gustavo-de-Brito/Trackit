@@ -57,7 +57,7 @@ export default function TodayView() {
       <TodayInfo>
         <h2>{ date }</h2>
         <h3>
-          { percentProgress === 0 ? "Nenhum hábito concluído ainda" : <span>{percentProgress}% dos hábitos concluídos</span> }
+          { !percentProgress ? "Nenhum hábito concluído ainda" : <span>{percentProgress}% dos hábitos concluídos</span> }
         </h3>
       </TodayInfo>
       <TodoHabits habitsList={ habitsList } requestHabits={ requestHabits } />
